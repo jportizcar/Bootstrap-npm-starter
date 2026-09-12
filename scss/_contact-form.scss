@@ -1,0 +1,24 @@
+// Contact form styles
+
+.contact-form {
+  padding: 1.5rem;
+  background-color: $gray-100;
+  border-radius: $border-radius;
+}
+
+.contact-form .form-control:focus {
+  border-color: $success;
+  box-shadow: 0 0 0 .2rem rgba($success, .25);
+}
+
+.contact-form__status:empty {
+  display: none;
+}
+
+.contact-form__status.text-success::before {
+  content: "✓ ";
+}
+
+.contact-form__status.text-danger::before {
+  content: "✕ ";
+}

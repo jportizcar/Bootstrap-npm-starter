@@ -20,3 +20,57 @@
 
 import "../../node_modules/bootstrap/js/dist/util.js";
 import "../../node_modules/bootstrap/js/dist/modal.js";
+
+// Contact form: Bootstrap validation styles + AJAX submit to Netlify Forms
+const contactForm = document.querySelector('form[name="contact"]');
+
+if (contactForm) {
+  const statusEl = contactForm.querySelector(".contact-form__status");
+  const submitBtn = contactForm.querySelector('button[type="submit"]');
+
+  const encode = (data) =>
+    Object.keys(data)
+      .map((key) => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+      .join("&");
+
+  const setStatus = (message, isError) => {
+    statusEl.textContent = message;
+    statusEl.classList.toggle("text-danger", isError);
+    statusEl.classList.toggle("text-success", !isError);
+  };
+
+  contactForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+
+    if (!contactForm.checkValidity()) {
+      contactForm.classList.add("was-validated");
+      return;
+    }
+
+    submitBtn.disabled = true;
+    setStatus("Enviando...", false);
+
+    const formData = new FormData(contactForm);
+
+    fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: encode(Object.fromEntries(formData)),
+    })
+      .then((response) => {
+        if (!response.ok) throw new Error("Request failed");
+      })
+      .then(() => {
+        setStatus("¡Gracias! Tu mensaje fue enviado.", false);
+        contactForm.reset();
+        contactForm.classList.remove("was-validated");
+      })
+      .catch(() => {
+        setStatus("Ocurrió un error al enviar. Intentá de nuevo.", true);
+      })
+      .finally(() => {
+        submitBtn.disabled = false;
+      });
+  });
+}
