@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="assets/css/starter.css">
+    <title>¡Gracias! · Bootstrap npm starter</title>
+    <style>
+      body {
+        padding: 0;
+      }
+
+      .thanks {
+        min-height: 100vh;
+      }
+
+      .thanks-icon {
+        width: 72px;
+        height: 72px;
+        animation: thanks-icon-in .5s ease-out both;
+      }
+
+      @keyframes thanks-icon-in {
+        from {
+          opacity: 0;
+          transform: scale(.5);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .thanks-icon {
+          animation: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="thanks d-flex flex-column align-items-center justify-content-center text-center px-3">
+      <svg class="bi thanks-icon text-success mb-4" viewBox="0 0 16 16" fill="currentColor" role="img" aria-label="Check">
+        <use xlink:href="node_modules/bootstrap-icons/bootstrap-icons.svg#check-circle-fill"/>
+      </svg>
+
+      <h1>¡Gracias!</h1>
+      <p class="lead text-muted">Tu mensaje fue enviado correctamente.</p>
+
+      <a href="/" class="btn btn-primary mt-3">Volver al inicio</a>
+    </div>
+  </body>
+</html>

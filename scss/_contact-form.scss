@@ -10,15 +10,3 @@
   border-color: $success;
   box-shadow: 0 0 0 .2rem rgba($success, .25);
 }
-
-.contact-form__status:empty {
-  display: none;
-}
-
-.contact-form__status.text-success::before {
-  content: "✓ ";
-}
-
-.contact-form__status.text-danger::before {
-  content: "✕ ";
-}
